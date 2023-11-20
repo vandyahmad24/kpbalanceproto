@@ -1,0 +1,29 @@
+syntax = "proto3";
+package kpbalanceproto;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/djoonta/kpbalanceproto/balance";
+
+message BalanceInfo {
+  string id = 1;
+  string note = 2;
+  double pending_amount = 3;
+  string from_id = 4;
+  double from_balance = 5;
+  string to_id = 6;
+  double to_balance = 7;
+  string status = 8;
+  google.protobuf.Timestamp created_at = 9;
+  google.protobuf.Timestamp updated_at = 10;
+  double from_last = 11;
+  double to_last = 12;
+  string type = 13;
+}
+
+message BalanceFindIDRequest {
+  string id = 1;
+}
+message BalanceFindIDResponse {
+  BalanceInfo balance = 1;
+}

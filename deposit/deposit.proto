@@ -1,0 +1,27 @@
+syntax = "proto3";
+package kpbalanceproto;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/djoonta/kpbalanceproto/deposit";
+
+message DepositInfo {
+  string id = 1;
+  string balance_id = 2;
+  string vendor = 4;
+  string bank_account_id = 5;
+  double amount = 6;
+  int32 code = 7;
+  bool verified = 8;
+  google.protobuf.Timestamp created_at = 9;
+  google.protobuf.Timestamp updated_at = 10;
+  string teller_id = 11;
+  string verified_by_id = 12;
+}
+
+message DepositFindIDRequest {
+  string id = 1;
+}
+message DepositFindIDResponse {
+  DepositInfo deposit = 1;
+}

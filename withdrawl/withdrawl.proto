@@ -1,0 +1,27 @@
+syntax = "proto3";
+package kpbalanceproto;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/djoonta/kpbalanceproto/withdrawl";
+
+message WithdrawlInfo {
+  string id = 1;
+  string balance_id = 2;
+  string vendor = 3;
+  string bank_account_id = 4;
+  double amount = 5;
+  bool verified = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp updated_at = 8;
+  string teller_id = 9;
+  string verified_by_id = 10;
+  string type = 11;
+}
+
+message WithdrawlFindIDRequest {
+  string id = 1;
+}
+message WithdrawlFindIDResponse {
+  WithdrawlInfo withdrawl = 1;
+}

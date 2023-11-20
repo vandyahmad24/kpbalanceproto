@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package kpbalanceproto;
+
+import "balance/balance.proto";
+import "check_conn/check_conn.proto";
+import "deposit/deposit.proto";
+import "withdrawl/withdrawl.proto";
+
+option go_package = "github.com/djoonta/kpbalanceproto";
+
+service CheckConnService {
+  rpc CheckConn(CheckConnRequest) returns (CheckConnResponse) {}
+}
+
+service BalanceService {
+  rpc BalanceFindID(BalanceFindIDRequest) returns (BalanceFindIDResponse) {}
+}
+
+service DepositService {
+  rpc DepositFindID(DepositFindIDRequest) returns (DepositFindIDResponse) {}
+}
+
+service WithdrawlService {
+  rpc WithdrawlFindID(WithdrawlFindIDRequest) returns (WithdrawlFindIDResponse) {}
+}

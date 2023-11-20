@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package kpbalanceproto;
+
+option go_package = "github.com/djoonta/kpbalanceproto/check_conn";
+
+message CheckConnRequest {
+  string msg = 1;
+}
+message CheckConnResponse {
+  string msg = 1;
+}
