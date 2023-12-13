@@ -113,6 +113,10 @@ var CheckConnService_ServiceDesc = grpc.ServiceDesc{
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BalanceServiceClient interface {
 	BalanceFindID(ctx context.Context, in *balance.BalanceFindIDRequest, opts ...grpc.CallOption) (*balance.BalanceFindIDResponse, error)
+	FindAll(ctx context.Context, in *balance.BalanceFindAllRequest, opts ...grpc.CallOption) (*balance.BalanceFindAllResponse, error)
+	Create(ctx context.Context, in *balance.BalanceCreateRequest, opts ...grpc.CallOption) (*balance.BalanceCreateResponse, error)
+	Delete(ctx context.Context, in *balance.BalanceDeleteRequest, opts ...grpc.CallOption) (*balance.BalanceDeleteResponse, error)
+	Update(ctx context.Context, in *balance.BalanceUpdateRequest, opts ...grpc.CallOption) (*balance.BalanceUpdateResponse, error)
 }
 
 type balanceServiceClient struct {
@@ -132,11 +136,51 @@ func (c *balanceServiceClient) BalanceFindID(ctx context.Context, in *balance.Ba
 	return out, nil
 }
 
+func (c *balanceServiceClient) FindAll(ctx context.Context, in *balance.BalanceFindAllRequest, opts ...grpc.CallOption) (*balance.BalanceFindAllResponse, error) {
+	out := new(balance.BalanceFindAllResponse)
+	err := c.cc.Invoke(ctx, "/kpbalanceproto.BalanceService/FindAll", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *balanceServiceClient) Create(ctx context.Context, in *balance.BalanceCreateRequest, opts ...grpc.CallOption) (*balance.BalanceCreateResponse, error) {
+	out := new(balance.BalanceCreateResponse)
+	err := c.cc.Invoke(ctx, "/kpbalanceproto.BalanceService/Create", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *balanceServiceClient) Delete(ctx context.Context, in *balance.BalanceDeleteRequest, opts ...grpc.CallOption) (*balance.BalanceDeleteResponse, error) {
+	out := new(balance.BalanceDeleteResponse)
+	err := c.cc.Invoke(ctx, "/kpbalanceproto.BalanceService/Delete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *balanceServiceClient) Update(ctx context.Context, in *balance.BalanceUpdateRequest, opts ...grpc.CallOption) (*balance.BalanceUpdateResponse, error) {
+	out := new(balance.BalanceUpdateResponse)
+	err := c.cc.Invoke(ctx, "/kpbalanceproto.BalanceService/Update", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BalanceServiceServer is the server API for BalanceService service.
 // All implementations must embed UnimplementedBalanceServiceServer
 // for forward compatibility
 type BalanceServiceServer interface {
 	BalanceFindID(context.Context, *balance.BalanceFindIDRequest) (*balance.BalanceFindIDResponse, error)
+	FindAll(context.Context, *balance.BalanceFindAllRequest) (*balance.BalanceFindAllResponse, error)
+	Create(context.Context, *balance.BalanceCreateRequest) (*balance.BalanceCreateResponse, error)
+	Delete(context.Context, *balance.BalanceDeleteRequest) (*balance.BalanceDeleteResponse, error)
+	Update(context.Context, *balance.BalanceUpdateRequest) (*balance.BalanceUpdateResponse, error)
 	mustEmbedUnimplementedBalanceServiceServer()
 }
 
@@ -146,6 +190,18 @@ type UnimplementedBalanceServiceServer struct {
 
 func (UnimplementedBalanceServiceServer) BalanceFindID(context.Context, *balance.BalanceFindIDRequest) (*balance.BalanceFindIDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BalanceFindID not implemented")
+}
+func (UnimplementedBalanceServiceServer) FindAll(context.Context, *balance.BalanceFindAllRequest) (*balance.BalanceFindAllResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FindAll not implemented")
+}
+func (UnimplementedBalanceServiceServer) Create(context.Context, *balance.BalanceCreateRequest) (*balance.BalanceCreateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (UnimplementedBalanceServiceServer) Delete(context.Context, *balance.BalanceDeleteRequest) (*balance.BalanceDeleteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedBalanceServiceServer) Update(context.Context, *balance.BalanceUpdateRequest) (*balance.BalanceUpdateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
 func (UnimplementedBalanceServiceServer) mustEmbedUnimplementedBalanceServiceServer() {}
 
@@ -178,6 +234,78 @@ func _BalanceService_BalanceFindID_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BalanceService_FindAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(balance.BalanceFindAllRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BalanceServiceServer).FindAll(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kpbalanceproto.BalanceService/FindAll",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BalanceServiceServer).FindAll(ctx, req.(*balance.BalanceFindAllRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BalanceService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(balance.BalanceCreateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BalanceServiceServer).Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kpbalanceproto.BalanceService/Create",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BalanceServiceServer).Create(ctx, req.(*balance.BalanceCreateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BalanceService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(balance.BalanceDeleteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BalanceServiceServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kpbalanceproto.BalanceService/Delete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BalanceServiceServer).Delete(ctx, req.(*balance.BalanceDeleteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BalanceService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(balance.BalanceUpdateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BalanceServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kpbalanceproto.BalanceService/Update",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BalanceServiceServer).Update(ctx, req.(*balance.BalanceUpdateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BalanceService_ServiceDesc is the grpc.ServiceDesc for BalanceService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -189,6 +317,22 @@ var BalanceService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "BalanceFindID",
 			Handler:    _BalanceService_BalanceFindID_Handler,
 		},
+		{
+			MethodName: "FindAll",
+			Handler:    _BalanceService_FindAll_Handler,
+		},
+		{
+			MethodName: "Create",
+			Handler:    _BalanceService_Create_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _BalanceService_Delete_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _BalanceService_Update_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "kpbalanceproto.proto",
@@ -199,6 +343,10 @@ var BalanceService_ServiceDesc = grpc.ServiceDesc{
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type DepositServiceClient interface {
 	DepositFindID(ctx context.Context, in *deposit.DepositFindIDRequest, opts ...grpc.CallOption) (*deposit.DepositFindIDResponse, error)
+	FindAll(ctx context.Context, in *deposit.DepositFindAllRequest, opts ...grpc.CallOption) (*deposit.DepositFindAllResponse, error)
+	Create(ctx context.Context, in *deposit.DepositCreateRequest, opts ...grpc.CallOption) (*deposit.DepositCreateResponse, error)
+	Delete(ctx context.Context, in *deposit.DepositDeleteRequest, opts ...grpc.CallOption) (*deposit.DepositDeleteResponse, error)
+	Update(ctx context.Context, in *deposit.DepositUpdateRequest, opts ...grpc.CallOption) (*deposit.DepositUpdateResponse, error)
 }
 
 type depositServiceClient struct {
@@ -218,11 +366,51 @@ func (c *depositServiceClient) DepositFindID(ctx context.Context, in *deposit.De
 	return out, nil
 }
 
+func (c *depositServiceClient) FindAll(ctx context.Context, in *deposit.DepositFindAllRequest, opts ...grpc.CallOption) (*deposit.DepositFindAllResponse, error) {
+	out := new(deposit.DepositFindAllResponse)
+	err := c.cc.Invoke(ctx, "/kpbalanceproto.DepositService/FindAll", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *depositServiceClient) Create(ctx context.Context, in *deposit.DepositCreateRequest, opts ...grpc.CallOption) (*deposit.DepositCreateResponse, error) {
+	out := new(deposit.DepositCreateResponse)
+	err := c.cc.Invoke(ctx, "/kpbalanceproto.DepositService/Create", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *depositServiceClient) Delete(ctx context.Context, in *deposit.DepositDeleteRequest, opts ...grpc.CallOption) (*deposit.DepositDeleteResponse, error) {
+	out := new(deposit.DepositDeleteResponse)
+	err := c.cc.Invoke(ctx, "/kpbalanceproto.DepositService/Delete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *depositServiceClient) Update(ctx context.Context, in *deposit.DepositUpdateRequest, opts ...grpc.CallOption) (*deposit.DepositUpdateResponse, error) {
+	out := new(deposit.DepositUpdateResponse)
+	err := c.cc.Invoke(ctx, "/kpbalanceproto.DepositService/Update", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DepositServiceServer is the server API for DepositService service.
 // All implementations must embed UnimplementedDepositServiceServer
 // for forward compatibility
 type DepositServiceServer interface {
 	DepositFindID(context.Context, *deposit.DepositFindIDRequest) (*deposit.DepositFindIDResponse, error)
+	FindAll(context.Context, *deposit.DepositFindAllRequest) (*deposit.DepositFindAllResponse, error)
+	Create(context.Context, *deposit.DepositCreateRequest) (*deposit.DepositCreateResponse, error)
+	Delete(context.Context, *deposit.DepositDeleteRequest) (*deposit.DepositDeleteResponse, error)
+	Update(context.Context, *deposit.DepositUpdateRequest) (*deposit.DepositUpdateResponse, error)
 	mustEmbedUnimplementedDepositServiceServer()
 }
 
@@ -232,6 +420,18 @@ type UnimplementedDepositServiceServer struct {
 
 func (UnimplementedDepositServiceServer) DepositFindID(context.Context, *deposit.DepositFindIDRequest) (*deposit.DepositFindIDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DepositFindID not implemented")
+}
+func (UnimplementedDepositServiceServer) FindAll(context.Context, *deposit.DepositFindAllRequest) (*deposit.DepositFindAllResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FindAll not implemented")
+}
+func (UnimplementedDepositServiceServer) Create(context.Context, *deposit.DepositCreateRequest) (*deposit.DepositCreateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (UnimplementedDepositServiceServer) Delete(context.Context, *deposit.DepositDeleteRequest) (*deposit.DepositDeleteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedDepositServiceServer) Update(context.Context, *deposit.DepositUpdateRequest) (*deposit.DepositUpdateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
 func (UnimplementedDepositServiceServer) mustEmbedUnimplementedDepositServiceServer() {}
 
@@ -264,6 +464,78 @@ func _DepositService_DepositFindID_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DepositService_FindAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(deposit.DepositFindAllRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DepositServiceServer).FindAll(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kpbalanceproto.DepositService/FindAll",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DepositServiceServer).FindAll(ctx, req.(*deposit.DepositFindAllRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DepositService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(deposit.DepositCreateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DepositServiceServer).Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kpbalanceproto.DepositService/Create",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DepositServiceServer).Create(ctx, req.(*deposit.DepositCreateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DepositService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(deposit.DepositDeleteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DepositServiceServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kpbalanceproto.DepositService/Delete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DepositServiceServer).Delete(ctx, req.(*deposit.DepositDeleteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DepositService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(deposit.DepositUpdateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DepositServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kpbalanceproto.DepositService/Update",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DepositServiceServer).Update(ctx, req.(*deposit.DepositUpdateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // DepositService_ServiceDesc is the grpc.ServiceDesc for DepositService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -275,6 +547,22 @@ var DepositService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "DepositFindID",
 			Handler:    _DepositService_DepositFindID_Handler,
 		},
+		{
+			MethodName: "FindAll",
+			Handler:    _DepositService_FindAll_Handler,
+		},
+		{
+			MethodName: "Create",
+			Handler:    _DepositService_Create_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _DepositService_Delete_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _DepositService_Update_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "kpbalanceproto.proto",
@@ -285,6 +573,10 @@ var DepositService_ServiceDesc = grpc.ServiceDesc{
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type WithdrawlServiceClient interface {
 	WithdrawlFindID(ctx context.Context, in *withdrawl.WithdrawlFindIDRequest, opts ...grpc.CallOption) (*withdrawl.WithdrawlFindIDResponse, error)
+	FindAll(ctx context.Context, in *withdrawl.WithdrawlFindAllRequest, opts ...grpc.CallOption) (*withdrawl.WithdrawlFindAllResponse, error)
+	Create(ctx context.Context, in *withdrawl.WithdrawlCreateRequest, opts ...grpc.CallOption) (*withdrawl.WithdrawlCreateResponse, error)
+	Delete(ctx context.Context, in *withdrawl.WithdrawlDeleteRequest, opts ...grpc.CallOption) (*withdrawl.WithdrawlDeleteResponse, error)
+	Update(ctx context.Context, in *withdrawl.WithdrawlUpdateRequest, opts ...grpc.CallOption) (*withdrawl.WithdrawlUpdateResponse, error)
 }
 
 type withdrawlServiceClient struct {
@@ -304,11 +596,51 @@ func (c *withdrawlServiceClient) WithdrawlFindID(ctx context.Context, in *withdr
 	return out, nil
 }
 
+func (c *withdrawlServiceClient) FindAll(ctx context.Context, in *withdrawl.WithdrawlFindAllRequest, opts ...grpc.CallOption) (*withdrawl.WithdrawlFindAllResponse, error) {
+	out := new(withdrawl.WithdrawlFindAllResponse)
+	err := c.cc.Invoke(ctx, "/kpbalanceproto.WithdrawlService/FindAll", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *withdrawlServiceClient) Create(ctx context.Context, in *withdrawl.WithdrawlCreateRequest, opts ...grpc.CallOption) (*withdrawl.WithdrawlCreateResponse, error) {
+	out := new(withdrawl.WithdrawlCreateResponse)
+	err := c.cc.Invoke(ctx, "/kpbalanceproto.WithdrawlService/Create", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *withdrawlServiceClient) Delete(ctx context.Context, in *withdrawl.WithdrawlDeleteRequest, opts ...grpc.CallOption) (*withdrawl.WithdrawlDeleteResponse, error) {
+	out := new(withdrawl.WithdrawlDeleteResponse)
+	err := c.cc.Invoke(ctx, "/kpbalanceproto.WithdrawlService/Delete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *withdrawlServiceClient) Update(ctx context.Context, in *withdrawl.WithdrawlUpdateRequest, opts ...grpc.CallOption) (*withdrawl.WithdrawlUpdateResponse, error) {
+	out := new(withdrawl.WithdrawlUpdateResponse)
+	err := c.cc.Invoke(ctx, "/kpbalanceproto.WithdrawlService/Update", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WithdrawlServiceServer is the server API for WithdrawlService service.
 // All implementations must embed UnimplementedWithdrawlServiceServer
 // for forward compatibility
 type WithdrawlServiceServer interface {
 	WithdrawlFindID(context.Context, *withdrawl.WithdrawlFindIDRequest) (*withdrawl.WithdrawlFindIDResponse, error)
+	FindAll(context.Context, *withdrawl.WithdrawlFindAllRequest) (*withdrawl.WithdrawlFindAllResponse, error)
+	Create(context.Context, *withdrawl.WithdrawlCreateRequest) (*withdrawl.WithdrawlCreateResponse, error)
+	Delete(context.Context, *withdrawl.WithdrawlDeleteRequest) (*withdrawl.WithdrawlDeleteResponse, error)
+	Update(context.Context, *withdrawl.WithdrawlUpdateRequest) (*withdrawl.WithdrawlUpdateResponse, error)
 	mustEmbedUnimplementedWithdrawlServiceServer()
 }
 
@@ -318,6 +650,18 @@ type UnimplementedWithdrawlServiceServer struct {
 
 func (UnimplementedWithdrawlServiceServer) WithdrawlFindID(context.Context, *withdrawl.WithdrawlFindIDRequest) (*withdrawl.WithdrawlFindIDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method WithdrawlFindID not implemented")
+}
+func (UnimplementedWithdrawlServiceServer) FindAll(context.Context, *withdrawl.WithdrawlFindAllRequest) (*withdrawl.WithdrawlFindAllResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FindAll not implemented")
+}
+func (UnimplementedWithdrawlServiceServer) Create(context.Context, *withdrawl.WithdrawlCreateRequest) (*withdrawl.WithdrawlCreateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (UnimplementedWithdrawlServiceServer) Delete(context.Context, *withdrawl.WithdrawlDeleteRequest) (*withdrawl.WithdrawlDeleteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedWithdrawlServiceServer) Update(context.Context, *withdrawl.WithdrawlUpdateRequest) (*withdrawl.WithdrawlUpdateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
 func (UnimplementedWithdrawlServiceServer) mustEmbedUnimplementedWithdrawlServiceServer() {}
 
@@ -350,6 +694,78 @@ func _WithdrawlService_WithdrawlFindID_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _WithdrawlService_FindAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(withdrawl.WithdrawlFindAllRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WithdrawlServiceServer).FindAll(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kpbalanceproto.WithdrawlService/FindAll",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WithdrawlServiceServer).FindAll(ctx, req.(*withdrawl.WithdrawlFindAllRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WithdrawlService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(withdrawl.WithdrawlCreateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WithdrawlServiceServer).Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kpbalanceproto.WithdrawlService/Create",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WithdrawlServiceServer).Create(ctx, req.(*withdrawl.WithdrawlCreateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WithdrawlService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(withdrawl.WithdrawlDeleteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WithdrawlServiceServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kpbalanceproto.WithdrawlService/Delete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WithdrawlServiceServer).Delete(ctx, req.(*withdrawl.WithdrawlDeleteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WithdrawlService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(withdrawl.WithdrawlUpdateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WithdrawlServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kpbalanceproto.WithdrawlService/Update",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WithdrawlServiceServer).Update(ctx, req.(*withdrawl.WithdrawlUpdateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // WithdrawlService_ServiceDesc is the grpc.ServiceDesc for WithdrawlService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -360,6 +776,22 @@ var WithdrawlService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "WithdrawlFindID",
 			Handler:    _WithdrawlService_WithdrawlFindID_Handler,
+		},
+		{
+			MethodName: "FindAll",
+			Handler:    _WithdrawlService_FindAll_Handler,
+		},
+		{
+			MethodName: "Create",
+			Handler:    _WithdrawlService_Create_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _WithdrawlService_Delete_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _WithdrawlService_Update_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

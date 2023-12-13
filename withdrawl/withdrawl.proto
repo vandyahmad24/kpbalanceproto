@@ -2,21 +2,22 @@ syntax = "proto3";
 package kpbalanceproto;
 
 import "google/protobuf/timestamp.proto";
+import "pagination/pagination.proto";
 
 option go_package = "github.com/djoonta/kpbalanceproto/withdrawl";
 
 message WithdrawlInfo {
   string id = 1;
   string balance_id = 2;
-  string vendor = 3;
-  string bank_account_id = 4;
-  double amount = 5;
-  bool verified = 6;
-  google.protobuf.Timestamp created_at = 7;
-  google.protobuf.Timestamp updated_at = 8;
-  string teller_id = 9;
-  string verified_by_id = 10;
-  string type = 11;
+  string vendor = 4;
+  string bank_account_id = 5;
+  double amount = 6;
+  bool verified = 7;
+  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp updated_at = 9;
+  string teller_id = 10;
+  string verified_by_id = 11;
+  string type =12;
 }
 
 message WithdrawlFindIDRequest {
@@ -25,3 +26,57 @@ message WithdrawlFindIDRequest {
 message WithdrawlFindIDResponse {
   WithdrawlInfo withdrawl = 1;
 }
+
+message WithdrawlFindAllRequest {
+  string page = 1;
+  string limit = 2;
+}
+message WithdrawlFindAllResponse {
+  repeated WithdrawlInfo withdrawls = 1;
+  PaginationInfo pagination=2;
+}
+
+message WithdrawlWriteResponse {
+  bool success = 1;
+  string messsage = 2;
+}
+
+
+
+
+message WithdrawlCreateRequest {
+  string balance_id = 1;
+  string vendor = 2;
+  string bank_account_id = 3;
+  double amount = 4;
+  bool verified = 5;
+  string teller_id = 6;
+  string verified_by_id = 7;
+  string type=8;
+}
+message WithdrawlCreateResponse {
+  WithdrawlWriteResponse create_response = 1;
+}
+
+message WithdrawlDeleteRequest {
+  string id = 1;
+}
+message WithdrawlDeleteResponse {
+  WithdrawlWriteResponse delete_response = 1;
+}
+
+message WithdrawlUpdateRequest {
+  string id = 1;
+  string balance_id = 2;
+  string vendor = 4;
+  string bank_account_id = 5;
+  double amount = 6;
+  bool verified = 7;
+  string teller_id = 8;
+  string verified_by_id = 9;
+  string type=10;
+}
+message WithdrawlUpdateResponse {
+  WithdrawlWriteResponse update_response = 1;
+}
+

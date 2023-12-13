@@ -15,12 +15,24 @@ service CheckConnService {
 
 service BalanceService {
   rpc BalanceFindID(BalanceFindIDRequest) returns (BalanceFindIDResponse) {}
+  rpc FindAll(BalanceFindAllRequest) returns (BalanceFindAllResponse) {}
+  rpc Create(BalanceCreateRequest) returns (BalanceCreateResponse) {}
+  rpc Delete(BalanceDeleteRequest) returns (BalanceDeleteResponse) {}
+  rpc Update(BalanceUpdateRequest) returns (BalanceUpdateResponse) {} 
 }
 
 service DepositService {
   rpc DepositFindID(DepositFindIDRequest) returns (DepositFindIDResponse) {}
+  rpc FindAll(DepositFindAllRequest) returns (DepositFindAllResponse) {}
+  rpc Create(DepositCreateRequest) returns (DepositCreateResponse) {}
+  rpc Delete(DepositDeleteRequest) returns (DepositDeleteResponse) {}
+  rpc Update(DepositUpdateRequest) returns (DepositUpdateResponse) {} 
 }
 
 service WithdrawlService {
   rpc WithdrawlFindID(WithdrawlFindIDRequest) returns (WithdrawlFindIDResponse) {}
+  rpc FindAll(WithdrawlFindAllRequest) returns (WithdrawlFindAllResponse) {}
+  rpc Create(WithdrawlCreateRequest) returns (WithdrawlCreateResponse) {}
+  rpc Delete(WithdrawlDeleteRequest) returns (WithdrawlDeleteResponse) {}
+  rpc Update(WithdrawlUpdateRequest) returns (WithdrawlUpdateResponse) {} 
 }

@@ -2,6 +2,7 @@ syntax = "proto3";
 package kpbalanceproto;
 
 import "google/protobuf/timestamp.proto";
+import "pagination/pagination.proto";
 
 option go_package = "github.com/djoonta/kpbalanceproto/balance";
 
@@ -9,16 +10,17 @@ message BalanceInfo {
   string id = 1;
   string note = 2;
   double pending_amount = 3;
-  string from_id = 4;
-  double from_balance = 5;
-  string to_id = 6;
-  double to_balance = 7;
-  string status = 8;
-  google.protobuf.Timestamp created_at = 9;
-  google.protobuf.Timestamp updated_at = 10;
-  double from_last = 11;
-  double to_last = 12;
-  string type = 13;
+  double amount = 4;
+  string from_id = 5;
+  double from_balance = 6;
+  string to_id = 7;
+  double to_balance = 8;
+  string status = 9;
+  google.protobuf.Timestamp created_at = 10;
+  google.protobuf.Timestamp updated_at = 11;
+  double from_last = 12;
+  double to_last = 13;
+  string type = 14;
 }
 
 message BalanceFindIDRequest {
@@ -27,3 +29,63 @@ message BalanceFindIDRequest {
 message BalanceFindIDResponse {
   BalanceInfo balance = 1;
 }
+
+message BalanceFindAllRequest {
+  string page = 1;
+  string limit = 2;
+}
+message BalanceFindAllResponse {
+  repeated BalanceInfo balances = 1;
+  PaginationInfo pagination=2;
+}
+
+message BalanceWriteResponse {
+  bool success = 1;
+  string messsage = 2;
+}
+
+
+
+
+message BalanceCreateRequest {
+  string note = 1;
+  double pending_amount = 2;
+  double amount = 3;
+  string from_id = 4;
+  double from_balance = 5;
+  string to_id = 6;
+  double to_balance = 7;
+  string status = 8;
+  double from_last = 9;
+  double to_last = 10;
+  string type = 11;
+}
+message BalanceCreateResponse {
+  BalanceWriteResponse create_response = 1;
+}
+
+message BalanceDeleteRequest {
+  string id = 1;
+}
+message BalanceDeleteResponse {
+  BalanceWriteResponse delete_response = 1;
+}
+
+message BalanceUpdateRequest {
+  string id = 1;
+  string note = 2;
+  double pending_amount = 3;
+  double amount = 4;
+  string from_id = 5;
+  double from_balance = 6;
+  string to_id = 7;
+  double to_balance = 8;
+  string status = 9;
+  double from_last = 10;
+  double to_last = 11;
+  string type = 12;
+}
+message BalanceUpdateResponse {
+  BalanceWriteResponse update_response = 1;
+}
+
