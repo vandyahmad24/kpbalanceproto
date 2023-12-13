@@ -2,6 +2,7 @@ syntax = "proto3";
 package kpbalanceproto;
 
 import "google/protobuf/timestamp.proto";
+import "pagination_balance/pagination.proto";
 
 option go_package = "github.com/djoonta/kpbalanceproto/deposit";
 
@@ -9,7 +10,7 @@ message DepositInfo {
   string id = 1;
   string balance_id = 2;
   string vendor = 4;
-  string bank_account_id = 5;
+  string deposit_account_id = 5;
   double amount = 6;
   int32 code = 7;
   bool verified = 8;
@@ -25,3 +26,47 @@ message DepositFindIDRequest {
 message DepositFindIDResponse {
   DepositInfo deposit = 1;
 }
+
+message DepositFindAllRequest {
+  string page = 1;
+  string limit = 2;
+}
+message DepositFindAllResponse {
+  repeated DepositInfo deposits = 1;
+  PaginationInfo pagination=2;
+}
+
+message DepositWriteResponse {
+  bool success = 1;
+  string messsage = 2;
+}
+
+
+message DepositCreateRequest {
+  string name = 1;
+  string description = 2;
+  string code =3;
+  string swift_code=4;
+}
+message DepositCreateResponse {
+  DepositWriteResponse create_response = 1;
+}
+
+message DepositDeleteRequest {
+  string id = 1;
+}
+message DepositDeleteResponse {
+  DepositWriteResponse delete_response = 1;
+}
+
+message DepositUpdateRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string code =4;
+  string swift_code=5;
+}
+message DepositUpdateResponse {
+  DepositWriteResponse update_response = 1;
+}
+
