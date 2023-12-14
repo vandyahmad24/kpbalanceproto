@@ -2,7 +2,7 @@ syntax = "proto3";
 package kpbalanceproto;
 
 import "google/protobuf/timestamp.proto";
-import "pagination/pagination.proto";
+import "pagination_balance/pagination_balance.proto";
 
 option go_package = "github.com/djoonta/kpbalanceproto/balance";
 

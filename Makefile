@@ -1,5 +1,5 @@
 PROTOC_MAIN = ./kpbalanceproto.proto
-PROTOC_PAGINATION = ./pagination/pagination.proto
+PROTOC_PAGINATION = ./pagination_balance/pagination_balance.proto
 PROTOC_CHECK_CONN = ./check_conn/check_conn.proto 
 PROTOC_BALANCE = ./balance/balance.proto
 PROTOC_DEPOSIT = ./deposit/deposit.proto

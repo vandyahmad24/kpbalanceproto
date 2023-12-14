@@ -2,7 +2,7 @@ syntax = "proto3";
 package kpbalanceproto;
 
 
-option go_package = "github.com/djoonta/kpbalanceproto/pagination";
+option go_package = "github.com/djoonta/kpbalanceproto/pagination_balance";
 
 message PaginationInfo {
   int32 current_page = 1;

@@ -2,7 +2,7 @@ syntax = "proto3";
 package kpbalanceproto;
 
 import "google/protobuf/timestamp.proto";
-import "pagination/pagination.proto";
+import "pagination_balance/pagination_balance.proto";
 
 option go_package = "github.com/djoonta/kpbalanceproto/deposit";
 
@@ -17,6 +17,9 @@ message DepositInfo {
   google.protobuf.Timestamp updated_at = 9;
   string teller_id = 10;
   string verified_by_id = 11;
+  string bank_name =12;
+  string bank_code =13;
+  string bank_swifth_code =14;
 }
 
 message DepositFindIDRequest {
