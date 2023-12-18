@@ -20,6 +20,8 @@ message DepositInfo {
   string bank_name =12;
   string bank_code =13;
   string bank_swifth_code =14;
+  string teller_name=15;
+  string verified_by_name=16;
 }
 
 message DepositFindIDRequest {

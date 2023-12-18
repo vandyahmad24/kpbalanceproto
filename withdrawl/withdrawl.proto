@@ -21,6 +21,8 @@ message WithdrawlInfo {
   string bank_name =13;
   string bank_code =14;
   string bank_swifth_code =15;
+  string teller_name=16;
+  string verified_by_name=17;
 }
 
 message WithdrawlFindIDRequest {

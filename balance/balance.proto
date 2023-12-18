@@ -21,6 +21,8 @@ message BalanceInfo {
   double from_last = 12;
   double to_last = 13;
   string type = 14;
+  string from_name=15;
+  string to_name=16;
 }
 
 message BalanceFindIDRequest {
